@@ -32,7 +32,7 @@
     border: 1px solid black;
     font-size: 32px;
     flex: 0 0 calc(24.9998% - 10px);
-}asdasd
+}
 
 .number-el:hover {
     background-color: gray;

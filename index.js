@@ -1,7 +1,9 @@
-const NUMBERS_CONTAINER = document.querySelector('.numbers')
+const NUMBERS_CONTAINER = document.querySelector('.numbers');
+const INPUT_CONTAINER = document.querySelector('.input-container');
 
 const onNumberClick = (e) => {
-    console.log(e.target)
+    const { target } = e;
+    
 }   
 
 NUMBERS_CONTAINER.addEventListener('click', onNumberClick)

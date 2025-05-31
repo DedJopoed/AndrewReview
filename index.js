@@ -5,13 +5,38 @@ const input_array = [];
 const onNumberClick = (e) => {
     const { target } = e;
     if (target.classList.contains('number-el')) {
-        if(target.innerHTML !== `&lt;`) {
-            input_array.push(target.innerHTML)
+        if(target.innerHTML !== `&lt;` && target.innerHTML !== `=` && !isNaN(+target.innerHTML)) {
+            input_array.push(+target.innerHTML)
         }
         else if(target.innerHTML == `&lt;`) {
             input_array.pop()
         }
+        else if(target.innerHTML == `=`) {
+            let math_result = [];
+            let group = '';
+
+            input_array.forEach((item) => {
+                if(typeof item === 'number') {
+                    group = `${group}${item}`
+                }else {
+                    math_result.push(group)
+                    group = `${item}`
+                    math_result.push(group)
+                    group = ''
+                }
+            })
+             if(group !== ''){
+                    math_result.push(group)
+                    group = ''
+                }
+            console.log(math_result)
+        }
+            else {
+            input_array.push(target.innerHTML)
+        }
+
         
+
         INPUT_CONTAINER.innerHTML = input_array.join(' ')
     }
     
@@ -19,3 +44,35 @@ const onNumberClick = (e) => {
 
 NUMBERS_CONTAINER.addEventListener('click', onNumberClick)
 
+
+
+//     if(typeof item === 'number') {
+            //         
+            //         console.log(math_result)
+            //     }
+            //     else {
+            //         math_result = `${math_result} ${item}`
+            //         console.log(math_result)
+            //     }
+            // })
+            // for(const item of input_array) { 
+            //     if(typeof item === "number") {
+            //         group.push(item)
+            //     }else{
+            //         result.push(group)
+            //         result.push(item)
+            //         group = [];
+                // }
+            // }
+            // if (group.length>0){
+            //     result.push(group);
+            // }
+            // result.forEach((item) => {
+            //     let math_result
+            //     if(Array.isArray(item)){
+                
+            //     }
+            //     else{
+            //         console.log(item)
+            //     }
+            // })  ВОЗМОЖНОЕ РЕШЕНИЕ

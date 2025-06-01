@@ -3,46 +3,64 @@ const INPUT_CONTAINER = document.querySelector('.input-container');
 const input_array = [];
 
 const onNumberClick = (e) => {
-    const { target } = e;
+    const {target} = e;
     if (target.classList.contains('number-el')) {
-        if(target.innerHTML !== `&lt;` && target.innerHTML !== `=` && !isNaN(+target.innerHTML)) {
-            input_array.push(+target.innerHTML)
+        
+        if(target.innerHTML !== `&lt;` && target.innerHTML !== `=`) {
+            INPUT_CONTAINER.innerHTML += ' ' + target.innerHTML;
+            console.log(target.innerHTML)
         }
-        else if(target.innerHTML == `&lt;`) {
-            input_array.pop()
+        else if (target.innerHTML == `&lt;`) {
+            INPUT_CONTAINER.innerHTML = INPUT_CONTAINER.innerHTML.slice(0, -2);
         }
-        else if(target.innerHTML == `=`) {
-            let math_result = [];
-            let group = '';
+        else if (target.innerHTML == `=`) {
+            let res = eval(String(INPUT_CONTAINER.innerHTML.replace(/\s/g,"")))
+            INPUT_CONTAINER.innerHTML = String(res).split("").join(" ");
+        }
+        }
+    }  
+    
+    NUMBERS_CONTAINER.addEventListener('click', onNumberClick)
+// const onNumberClick = (e) => {
+//     const { target } = e;
+//     if (target.classList.contains('number-el')) {
+//         if(target.innerHTML !== `&lt;` && target.innerHTML !== `=` && !isNaN(+target.innerHTML)) {
+//             input_array.push(+target.innerHTML)
+//         }
+//         else if(target.innerHTML == `&lt;`) {
+//             input_array.pop()
+//         }
+//         else if(target.innerHTML == `=`) {
+//             let math_result = [];
+//             let group = '';
 
-            input_array.forEach((item) => {
-                if(typeof item === 'number') {
-                    group = `${group}${item}`
-                }else {
-                    math_result.push(group)
-                    group = `${item}`
-                    math_result.push(group)
-                    group = ''
-                }
-            })
-             if(group !== ''){
-                    math_result.push(group)
-                    group = ''
-                }
-            console.log(math_result)
-        }
-            else {
-            input_array.push(target.innerHTML)
-        }
+//             input_array.forEach((item) => {
+//                 if(typeof item === 'number') {
+//                     group = `${group}${item}`
+//                 }else {
+//                     math_result.push(group)
+//                     group = `${item}`
+//                     math_result.push(group)
+//                     group = ''
+//                 }
+//             })
+//              if(group !== ''){
+//                     math_result.push(group)
+//                     group = ''
+//                 }
+//             console.log(math_result)
+//         }
+//             else {
+//             input_array.push(target.innerHTML)
+//         }
 
         
 
-        INPUT_CONTAINER.innerHTML = input_array.join(' ')
-    }
+// //         INPUT_CONTAINER.innerHTML = input_array.join(' ')
+// //     }
     
-}   
+// }   
 
-NUMBERS_CONTAINER.addEventListener('click', onNumberClick)
 
 
 

@@ -1,7 +1,10 @@
+* {
+    user-select: none;
+}
+
 .main-body {
     /* width: 410px; */
     display: flex;
-    
     align-items: center;
     flex-direction: column;
 }

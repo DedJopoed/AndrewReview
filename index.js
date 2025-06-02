@@ -1,10 +1,18 @@
 const NUMBERS_CONTAINER = document.querySelector('.numbers');
 const INPUT_CONTAINER = document.querySelector('.input-container');
 const input_array = [];
+let last_iterration;
 
 const onNumberClick = (e) => {
     const {target} = e;
+    if (target.innerHTML !== `&lt;` && INPUT_CONTAINER.innerHTML.length == 40)  {
+        alert("Слишком много символов!")
+        return
+    }
     if (target.classList.contains('number-el')) {
+        if (last_iterration == `=`) {
+            INPUT_CONTAINER.innerHTML = "";
+        }
         
         if(target.innerHTML !== `&lt;` && target.innerHTML !== `=`) {
             INPUT_CONTAINER.innerHTML += ' ' + target.innerHTML;
@@ -18,8 +26,13 @@ const onNumberClick = (e) => {
             INPUT_CONTAINER.innerHTML = String(res).split("").join(" ");
         }
         }
+    last_iterration = target.innerHTML
     }  
     
+    
+    
+
+
     NUMBERS_CONTAINER.addEventListener('click', onNumberClick)
 // const onNumberClick = (e) => {
 //     const { target } = e;

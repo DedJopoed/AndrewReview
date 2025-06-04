@@ -4,37 +4,47 @@ const input_array = [];
 let last_iterration;
 
 const onNumberClick = (e) => {
+    let res;
     const {target} = e;
+    const action = target.innerHTML
     if (target.innerHTML !== `&lt;` && INPUT_CONTAINER.innerHTML.length == 40)  {
         alert("Слишком много символов!")
-        return
+        return 
     }
     if (target.classList.contains('number-el')) {
-        if (last_iterration == `=`) {
+         if (last_iterration == `=`) {
             INPUT_CONTAINER.innerHTML = "";
-        }
-        
-        if(target.innerHTML !== `&lt;` && target.innerHTML !== `=`) {
-            INPUT_CONTAINER.innerHTML += ' ' + target.innerHTML;
-            console.log(target.innerHTML)
-        }
-        else if (target.innerHTML == `&lt;`) {
-            INPUT_CONTAINER.innerHTML = INPUT_CONTAINER.innerHTML.slice(0, -2);
-        }
-        else if (target.innerHTML == `=`) {
-            let res = eval(String(INPUT_CONTAINER.innerHTML.replace(/\s/g,"")))
-            INPUT_CONTAINER.innerHTML = String(res).split("").join(" ");
-        }
-        }
-    last_iterration = target.innerHTML
-    }  
-    
-    
-    
+            }
+
+        switch (action) {
+            case `&lt;`:
+                INPUT_CONTAINER.innerHTML = INPUT_CONTAINER.innerHTML.slice(0, -2);
+                break;
+            case `=`:
+                res = eval(String(INPUT_CONTAINER.innerHTML.replace(/\s/g,"")));
+                INPUT_CONTAINER.innerHTML = String(res).split("").join(" ");
+                break;
+            default:
+                INPUT_CONTAINER.innerHTML += ' ' + target.innerHTML;
+                break;
+        }    
+    }
+         last_iterration = target.innerHTML
+}
+
+NUMBERS_CONTAINER.addEventListener('click', onNumberClick)
 
 
-    NUMBERS_CONTAINER.addEventListener('click', onNumberClick)
-// const onNumberClick = (e) => {
+
+
+
+
+
+
+
+
+
+// // const onNumberClick = (e) => {
 //     const { target } = e;
 //     if (target.classList.contains('number-el')) {
 //         if(target.innerHTML !== `&lt;` && target.innerHTML !== `=` && !isNaN(+target.innerHTML)) {
